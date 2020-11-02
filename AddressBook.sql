@@ -31,4 +31,8 @@ insert into AddressBook values
 
 select * from AddressBook
 
+-- Editing the phone no. using name
+
+update AddressBook set Phone = '+91 8888888888' where FirstName = 'Aayush' and LastName ='Arya';
+
 
