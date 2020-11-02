@@ -21,4 +21,14 @@ Phone varchar(15) not null,
 Email varchar(20) not null 
 );
 
+select * from INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='Addressbook'
+
+--Inserting contacts into AddressBook table
+insert into AddressBook values
+('Aayush','Arya','123,xyz street','New Delhi','Delhi', '1100001','+91 9999999999', 'aayush@gmail.com'),
+('Aayu','Arya','1234,xwewyz street','New Delhi','Delhi', '1101111','+91 9988899999', 'aayu@gmail.com'),
+('Aayus','Arya','12345,xyz street','New Delhi','Delhi', '1100009','+91 9999999888', 'aayus@gmail.com');
+
+select * from AddressBook
+
 
