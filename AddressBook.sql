@@ -35,4 +35,9 @@ select * from AddressBook
 
 update AddressBook set Phone = '+91 8888888888' where FirstName = 'Aayush' and LastName ='Arya';
 
+--Deleting contact using name
+delete AddressBook where FirstName = 'Aayush' and LastName ='Arya';
+
+
+
 
