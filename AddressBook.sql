@@ -52,6 +52,11 @@ insert into AddressBook values
 select COUNT(City), City, State from AddressBook
 group by State, City;
 
+--Retrieve contacts sorted alphabetically by first name for a given city
+select * from AddressBook
+where City = 'New Delhi'
+order by FirstName;
+
 
 
 
