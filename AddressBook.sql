@@ -42,6 +42,16 @@ delete AddressBook where FirstName = 'Aayush' and LastName ='Arya';
 
 select * from AddressBook where City = 'New Delhi'
 
+insert into AddressBook values
+('Aayush1','Arya','123,xyz street','Bangalore','Karnataka', '1100001','+91 9999999991', 'aayush@gmail.com'),
+('Aayu1','Arya','1234,xwewyz street','Pune','Maharashtra', '1101111','+91 9988899991', 'aayu@gmail.com'),
+('Aayus1','Arya','12345,xyz street','Mumbai','Maharashtra', '1100009','+91 9999999881', 'aayus@gmail.com');
+
+
+
+select COUNT(City), City, State from AddressBook
+group by State, City;
+
 
 
 
