@@ -38,6 +38,10 @@ update AddressBook set Phone = '+91 8888888888' where FirstName = 'Aayush' and L
 --Deleting contact using name
 delete AddressBook where FirstName = 'Aayush' and LastName ='Arya';
 
+--Retrieve contact using name
+
+select * from AddressBook where City = 'New Delhi'
+
 
 
 
