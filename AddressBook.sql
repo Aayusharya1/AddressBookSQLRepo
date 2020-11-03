@@ -57,6 +57,25 @@ select * from AddressBook
 where City = 'New Delhi'
 order by FirstName;
 
+--UC9 Adding columns Address Book Name and Contact Type To Address Book Table
+alter table AddressBook
+add bookname varchar(15);
+
+alter table AddressBook
+add contact_type varchar(15);
+
+update AddressBook set bookname = 'Capgemini' 
+where FirstName in ('Aayush1','Aayu','Aayus1')
+
+update AddressBook set bookname = 'Bridgelabz' 
+where FirstName in ('Aayus','Aayu1')
 
 
+update AddressBook set contact_type = 'family' 
+where FirstName in ('Aayus','Aayu1')
 
+update AddressBook set contact_type = 'friends' 
+where FirstName in ('Aayu','Aayus1')
+
+update AddressBook set contact_type = 'profession' 
+where FirstName in ('Aayush1')
