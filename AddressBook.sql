@@ -79,3 +79,7 @@ where FirstName in ('Aayu','Aayus1')
 
 update AddressBook set contact_type = 'profession' 
 where FirstName in ('Aayush1')
+
+--Counting by type
+select count(contact_type) as No_of_Contact_Type,contact_type from AddressBook
+group by contact_type
