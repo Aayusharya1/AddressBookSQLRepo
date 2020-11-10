@@ -88,3 +88,33 @@ group by contact_type
 
 insert into AddressBook values
 ('Aayush1','Arya','123,xyz street','Bangalore','Karnataka', '1100001','+91 9999999991', 'aayush@gmail.com','Capgemini', 'family')
+
+--deleting the last added row and contact type column in order to restructure the table and add another separate table for contact type
+delete AddressBook where FirstName = 'Aayush1' and contact_type = 'family'
+alter table AddressBook
+drop column contact_type 
+
+select * from AddressBook
+
+--setting FirstName as primary key
+alter table AddressBook
+add primary key (FirstName)
+
+--Creating another table ContactType
+
+Create table ContactType1
+(
+FirstName varchar(20) not null foreign key references AddressBook(FirstName),
+Contact_type varchar(20)
+)
+
+insert into ContactType1 values
+('Aayu','family'),
+('Aayu','profession'),
+('Aayu1','friend'),
+('Aayus','family'),
+('Aayush1','friend')
+
+select * from ContactType1
+
+select * from AddressBook inner join ContactType1 on AddressBook.FirstName =ContactType1.FirstName
