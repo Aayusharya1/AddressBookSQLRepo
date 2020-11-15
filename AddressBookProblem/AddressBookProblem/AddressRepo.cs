@@ -161,5 +161,44 @@ namespace AddressBookProblem
                 connection.Close();
             }
         }
+
+        public bool AddContact(Contact contact)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                using (connection)
+                {
+                    SqlCommand command = new SqlCommand("SpAddContactDetails", connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@FirstName", contact.FirstName);
+                    command.Parameters.AddWithValue("@LastName", contact.LastName);
+                    command.Parameters.AddWithValue("@PhoneNumber", contact.PhoneNumber);
+                    command.Parameters.AddWithValue("@Email", contact.Email);
+                    command.Parameters.AddWithValue("@DateAdded", contact.DateAdded);
+                    command.Parameters.AddWithValue("@Contact_Type", contact.RelationType);
+                    command.Parameters.AddWithValue("@Address", contact.Address);
+                    command.Parameters.AddWithValue("@City", contact.City);
+                    command.Parameters.AddWithValue("@State", contact.State);
+                    command.Parameters.AddWithValue("@Zipcode", contact.Zipcode);
+                    connection.Open();
+                    var result = command.ExecuteNonQuery();
+                    if (result != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return false;
+        }
     }
 }

@@ -137,3 +137,30 @@ where FirstName in ('Aayus1')
 update AddressBook set DateAdded = '2020-01-19' 
 where FirstName in ('Aayus')
 
+alter table AddressBook
+drop column bookname
+
+create procedure SpAddContactDetails
+(
+@FirstName varchar(255),
+@LastName varchar(255),
+@Phone varchar(255),
+@Email varchar(255),
+@DateAdded DateTime,
+@Contact_type varchar(255),
+@Address varchar(255),
+@City varchar(255),
+@State varchar(255),
+@Zipcode varchar(255)
+)
+as
+begin
+insert into AddressBook values
+(
+@FirstName,@LastName, @Address, @City, @State, @Zipcode, @Phone, @Email, @DateAdded
+);
+insert into ContactType1 values
+(
+@FirstName, @Contact_type
+)
+end
