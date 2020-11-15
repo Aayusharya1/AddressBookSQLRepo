@@ -79,5 +79,39 @@ namespace AddressBookProblem
             }
             return false;
         }
+
+        public int DeleteContactsAddedInADateRange(string startDate, string endDate)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            int contactsDeleted = 0;
+            try
+            {
+                using (connection)
+                {
+                    string query = @"delete from AddressBook where DateAdded between '" + startDate + "' and '" + endDate + "';";
+                    SqlCommand cmd = new SqlCommand(query, connection);
+                    connection.Open();
+                    contactsDeleted = cmd.ExecuteNonQuery();
+                    if (contactsDeleted > 0)
+                    {
+                        Console.WriteLine(contactsDeleted + " contacts affected");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please check your query");
+                    }
+                }
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return contactsDeleted;
+        }
     }
 }
