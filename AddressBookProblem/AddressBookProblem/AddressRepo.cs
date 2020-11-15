@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AddressBookProblem
 {
@@ -199,6 +200,21 @@ namespace AddressBookProblem
                 connection.Close();
             }
             return false;
+        }
+
+        public int AddMultipleContactsUsingThreads(List<Contact> list)
+        {
+            int noOfContactsAdded = 0;
+            list.ForEach(contact =>
+            {
+                noOfContactsAdded++;
+                Task thread = new Task(() =>
+                {
+                    bool isAdded = AddContact(contact);
+                });
+                thread.Start();
+            });
+            return noOfContactsAdded;
         }
     }
 }

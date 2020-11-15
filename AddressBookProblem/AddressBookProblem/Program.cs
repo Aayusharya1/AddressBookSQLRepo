@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AddressBookProblem
 {
@@ -45,29 +46,37 @@ namespace AddressBookProblem
                         repo.RetrieveContactByCityOrState(city, state);
                         break;
                     case 5:
-                        Contact newContact = new Contact();
-                        Console.WriteLine("Enter the person details to be added in the address book");
-                        Console.WriteLine("First Name");
-                        newContact.FirstName = Console.ReadLine();
-                        Console.WriteLine("Last Name");
-                        newContact.LastName = Console.ReadLine();
-                        Console.WriteLine("Address");
-                        newContact.Address = Console.ReadLine();
-                        Console.WriteLine("City");
-                        newContact.City = Console.ReadLine();
-                        Console.WriteLine("State");
-                        newContact.State = Console.ReadLine();
-                        Console.WriteLine("Zip code");
-                        newContact.Zipcode = Console.ReadLine();
-                        Console.WriteLine("Phone Number");
-                        newContact.PhoneNumber = Console.ReadLine();
-                        Console.WriteLine("Email");
-                        newContact.Email = Console.ReadLine();
-                        Console.WriteLine("ContactType");
-                        newContact.RelationType = Console.ReadLine();
-                        Console.WriteLine("Date added");
-                        newContact.DateAdded = Convert.ToDateTime(Console.ReadLine());
-                        bool isContactAdded = repo.AddContact(newContact);
+                        Console.WriteLine("Enter Number of contacts to be added");
+                        int noOfContactAdded = Convert.ToInt32(Console.ReadLine());
+                        List<Contact> list = new List<Contact>();
+                        while (noOfContactAdded >= 1)
+                        {
+                            Contact newContact = new Contact();
+                            Console.WriteLine("Enter the person details to be added in the address book");
+                            Console.WriteLine("First Name");
+                            newContact.FirstName = Console.ReadLine();
+                            Console.WriteLine("Last Name");
+                            newContact.LastName = Console.ReadLine();
+                            Console.WriteLine("Address");
+                            newContact.Address = Console.ReadLine();
+                            Console.WriteLine("City");
+                            newContact.City = Console.ReadLine();
+                            Console.WriteLine("State");
+                            newContact.State = Console.ReadLine();
+                            Console.WriteLine("Zip code");
+                            newContact.Zipcode = Console.ReadLine();
+                            Console.WriteLine("Phone Number");
+                            newContact.PhoneNumber = Console.ReadLine();
+                            Console.WriteLine("Email");
+                            newContact.Email = Console.ReadLine();
+                            Console.WriteLine("ContactType");
+                            newContact.RelationType = Console.ReadLine();
+                            Console.WriteLine("Date added");
+                            newContact.DateAdded = Convert.ToDateTime(Console.ReadLine());
+                            list.Add(newContact);
+                            noOfContactAdded--;
+                        }
+                        noOfContactAdded = repo.AddMultipleContactsUsingThreads(list);
                         break;
                     case 6:
                         loop = 0;
