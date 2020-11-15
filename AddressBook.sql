@@ -118,3 +118,22 @@ insert into ContactType1 values
 select * from ContactType1
 
 select * from AddressBook inner join ContactType1 on AddressBook.FirstName =ContactType1.FirstName
+
+alter table AddressBook
+add DateAdded datetime;
+
+update AddressBook set DateAdded = '2020-05-19' 
+where FirstName in ('Aayush1')
+
+update AddressBook set DateAdded = '2019-05-19' 
+where FirstName in ('Aayu')
+
+update AddressBook set DateAdded = '2020-08-09' 
+where FirstName in ('Aayu1')
+
+update AddressBook set DateAdded = '2020-05-19' 
+where FirstName in ('Aayus1')
+
+update AddressBook set DateAdded = '2020-01-19' 
+where FirstName in ('Aayus')
+

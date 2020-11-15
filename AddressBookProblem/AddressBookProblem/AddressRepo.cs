@@ -113,5 +113,53 @@ namespace AddressBookProblem
             }
             return contactsDeleted;
         }
+
+        public void RetrieveContactByCityOrState(string city, string state)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                using (connection)
+                {
+                    string query = @"select * from AddressBook ad inner join ContactType1 on AddressBook.FirstName =ContactType1.FirstName where ad.City = '" + city + "' and ad.State = '" + state + "'";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    connection.Open();
+                    SqlDataReader dr = command.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            Contact contact = new Contact();
+
+                            contact.FirstName = !dr.IsDBNull(0) ? dr.GetString(0) : "";
+                            contact.LastName = !dr.IsDBNull(1) ? dr.GetString(1) : "";
+                            contact.PhoneNumber = !dr.IsDBNull(6) ? dr.GetString(6) : "";
+                            contact.Email = !dr.IsDBNull(7) ? dr.GetString(7) : "";
+                            contact.RelationType = !dr.IsDBNull(11) ? dr.GetString(11) : "";
+                            contact.Address = !dr.IsDBNull(2) ? dr.GetString(2) : "";
+                            contact.City = !dr.IsDBNull(3) ? dr.GetString(3) : "";
+                            contact.State = !dr.IsDBNull(4) ? dr.GetString(4) : "";
+                            contact.Zipcode = !dr.IsDBNull(5) ? dr.GetString(5) : "";
+                            contact.DateAdded = !dr.IsDBNull(9) ? dr.GetDateTime(9) : Convert.ToDateTime("01/01/0001");
+
+                            Console.WriteLine(contact.FirstName + "," + contact.LastName + "," + contact.PhoneNumber + "," + contact.Email + "," + contact.DateAdded + "," + contact.RelationType + "," + contact.Address + "," + contact.City +
+                                "," + contact.State + "," + contact.Zipcode);
+                        }
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("No data found");
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                System.Console.WriteLine(exception.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }

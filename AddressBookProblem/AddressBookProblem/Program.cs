@@ -11,7 +11,7 @@ namespace AddressBookProblem
             int loop = 1;
             while (loop == 1)
             {
-                Console.WriteLine("Choose \n1. View all records \n2. Update PhoneNumber or Email \n3. Delete contacts added in a date range \n4. Exit");
+                Console.WriteLine("Choose \n1. View all records \n2. Update PhoneNumber or Email \n3. Delete contacts added in a date range \n4. Retrieve contacts by city and state \n5. Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -38,6 +38,13 @@ namespace AddressBookProblem
                         int contactsDeleted = repo.DeleteContactsAddedInADateRange(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
                         break;
                     case 4:
+                        Console.WriteLine("Enter city");
+                        string city = Console.ReadLine();
+                        Console.WriteLine("Enter state");
+                        string state = Console.ReadLine();
+                        repo.RetrieveContactByCityOrState(city, state);
+                        break;
+                    case 5:
                         loop = 0;
                         break;
                 }
