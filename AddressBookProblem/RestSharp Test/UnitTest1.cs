@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System.Collections.Generic;
 
@@ -35,6 +36,30 @@ namespace RestSharp_Test
             Assert.AreEqual(response.StatusCode, System.Net.HttpStatusCode.OK);
             List<Contact> dataResponse = JsonConvert.DeserializeObject<List<Contact>>(response.Content);
             Assert.AreEqual(4, dataResponse.Count);
+        }
+
+        [TestMethod]
+        public void GivenMultipleContacts_WhenPosted_ShouldReturnAddedContacts()
+        {
+            //arrange
+            List<Contact> list = new List<Contact>();
+            list.Add(new Contact { name = "Aay", Address = "Street lmn" });
+            list.Add(new Contact { name = "Aay1", Address = "Street lmn1" });
+            foreach (Contact contact in list)
+            {
+                //act
+                RestRequest request = new RestRequest("/Address", Method.POST);
+                JObject jObject = new JObject();
+                jObject.Add("Name", contact.name);
+                jObject.Add("Address", contact.Address);
+                request.AddParameter("application/json", jObject, ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                //Assert
+                Assert.AreEqual(response.StatusCode, System.Net.HttpStatusCode.Created);
+                Contact dataResponse = JsonConvert.DeserializeObject<Contact>(response.Content);
+                Assert.AreEqual(contact.name, dataResponse.name);
+                Assert.AreEqual(contact.Address, dataResponse.Address);
+            }
         }
     }
 }
