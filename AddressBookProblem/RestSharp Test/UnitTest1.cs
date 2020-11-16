@@ -81,5 +81,16 @@ namespace RestSharp_Test
             Assert.AreEqual("Street 123", dataResponse.Address);
             Console.WriteLine(response.Content);
         }
+
+        [TestMethod]
+        public void GivenContact_WhenDeleted_ShouldReturnStatusOk()
+        {
+            //arrange
+            RestRequest request = new RestRequest("/Address/2", Method.DELETE);
+            //act
+            IRestResponse response = client.Execute(request);
+            //assert
+            Assert.AreEqual(response.StatusCode, System.Net.HttpStatusCode.OK);
+        }
     }
 }
