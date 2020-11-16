@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using System;
 using System.Collections.Generic;
 
 namespace RestSharp_Test
@@ -60,6 +61,25 @@ namespace RestSharp_Test
                 Assert.AreEqual(contact.name, dataResponse.name);
                 Assert.AreEqual(contact.Address, dataResponse.Address);
             }
+        }
+
+        [TestMethod]
+        public void GivenContact_WhenUpdated_ShouldReturnUpdatedContact()
+        {
+            //arrange
+            RestRequest request = new RestRequest("/Address/5", Method.PUT);
+            JObject jObject = new JObject();
+            jObject.Add("Name", "Aay");
+            jObject.Add("Address", "Street 123");
+            //act
+            request.AddParameter("application/json", jObject, ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            //assert
+            Assert.AreEqual(response.StatusCode, System.Net.HttpStatusCode.OK);
+            Contact dataResponse = JsonConvert.DeserializeObject<Contact>(response.Content);
+            Assert.AreEqual("Aay", dataResponse.name);
+            Assert.AreEqual("Street 123", dataResponse.Address);
+            Console.WriteLine(response.Content);
         }
     }
 }
